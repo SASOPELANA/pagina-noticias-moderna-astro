@@ -1,0 +1,39 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+
+// Interface Astro
+interface Props {
+  title: string;
+  icons?: string;
+  description?: string;
+}
+
+// Creamos una objeto que recibe las props --> Astro.props
+const { title, description, icons } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={icons} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title || "Pagina de Noticias Moderna."}</title>
+  </head>
+  <body>
+    <Navbar />
+    <slot />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
