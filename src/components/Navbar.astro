@@ -1,5 +1,7 @@
 ---
 import Logo from "../assets/images/logo.svg";
+import iconClose from "../assets/images/icon-menu-close.svg";
+import IconOpen from "../assets/images/icon-menu.svg";
 
 interface NavItem {
   name: string;
@@ -15,17 +17,56 @@ const navItems: NavItem[] = [
 ];
 ---
 
-<nav class="w-[375px] border border-gray-800 flex justify-between">
+<nav class="flex justify-between items-center">
   <Logo />
-  <ul class="flex gap-1">
-    {
-      navItems.map((item: NavItem) => (
-        <li>
-          <a class="hover:text-amber-700" href={item.href}>
-            {item.name}{" "}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <IconOpen id="open-btn" class="cursor-pointer" />
+  <div id="menu-modal" class="bg-black/50 fixed inset-0 hidden">
+    <div
+      class="bg-Off-white absolute right-0 h-screen flex flex-col items-end px-5.25 py-6.75"
+    >
+      <img
+        id="close-btn"
+        src={iconClose.src}
+        alt="close"
+        class="cursor-pointer"
+      />
+
+      <ul class="flex flex-col w-64 gap-6 mt-22">
+        {
+          navItems.map((item: NavItem) => (
+            <li>
+              <a
+                class="text-lg cursor-pointer hover:text-Soft-orange"
+                href={item.href}
+              >
+                {item.name}{" "}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
 </nav>
+
+<script>
+  const closeBtm = document.getElementById("close-btn");
+  const openBtm = document.getElementById("open-btn");
+  const modal = document.getElementById("menu-modal");
+
+  const menuItems = document.querySelectorAll("a");
+
+  closeBtm?.addEventListener("click", () => {
+    modal?.classList.add("hidden");
+  });
+
+  openBtm?.addEventListener("click", () => {
+    modal?.classList.remove("hidden");
+  });
+
+  menuItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      modal?.classList.remove("hidden");
+    });
+  });
+</script>
