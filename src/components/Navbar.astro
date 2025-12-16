@@ -1,11 +1,31 @@
-<section>
-  <nav>
-    <ul>
-      <li><a href="/">Inicio</a></li>
-      <li><a href="/new">Nuevo</a></li>
-      <li><a href="/popular">Popular</a></li>
-      <li><a href="/trending">Tendencia</a></li>
-      <li><a href="/categories">Categorias</a></li>
-    </ul>
-  </nav>
-</section>
+---
+import Logo from "../assets/images/logo.svg";
+
+interface NavItem {
+  name: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  { name: "Inicio", href: "/" },
+  { name: "Nuevo", href: "/new" },
+  { name: "Popular", href: "/popular" },
+  { name: "Tendencias", href: "/trending" },
+  { name: "Categorías", href: "/categories" },
+];
+---
+
+<nav class="w-[375px] border border-gray-800 flex justify-between">
+  <Logo />
+  <ul class="flex gap-1">
+    {
+      navItems.map((item: NavItem) => (
+        <li>
+          <a class="hover:text-amber-700" href={item.href}>
+            {item.name}{" "}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

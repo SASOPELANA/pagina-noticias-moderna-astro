@@ -18,12 +18,15 @@ const { title, description, icons } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href={icons} />
+    <meta
+      name="description"
+      content={description ?? "Noticias modernas y actualizadas."}
+    />
+    <link rel="icon" type="image/svg+xml" href={icons ?? "/favicon.svg"} />
     <meta name="generator" content={Astro.generator} />
     <title>{title || "Pagina de Noticias Moderna."}</title>
   </head>
-  <body>
+  <body class="flex flex-col items-center">
     <Navbar />
     <slot />
   </body>
