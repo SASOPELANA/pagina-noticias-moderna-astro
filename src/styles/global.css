@@ -16,5 +16,19 @@
   --color-Dark-grayish-blue: hsl(236, 13%, 42%);
   --color-Very-dark-blue: hsl(240, 100%, 5%);
 
+  --color-black: #000000;
+  --color-dark: #191a23;
+  --color-gray: #f3f3f3;
+  --color-white: #ffffff;
+
   --font-Inter: Inter;
+}
+
+@layer components {
+  .btn-tertiary {
+    @apply bg-Soft-orange text-black rounded-lg px-[35px] py-5 transition-all duration-200;
+  }
+  .btn-tertiary:hover {
+    @apply bg-white text-black transform scale-105;
+  }
 }

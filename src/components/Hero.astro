@@ -1,7 +1,20 @@
 ---
+import { Image } from "astro:assets";
 import mobileImg from "../assets/images/image-web-3-mobile.jpg";
 ---
 
-<header>
-  <img src={mobileImg.src} alt="image web 3 mobile" />
+<header class="mb-16">
+  <Image class="mb-6" src={mobileImg} alt="image-web-3-mobile" />
+  <h1 class="text-[2.5rem]/10 font-extrabold mb-6">
+    El futuro brillante de la web 3.0?
+  </h1>
+  <p class="text-Dark-grayish-blue text-[0.9375rem] mb-6">
+    Nos sumergimos en la próxima evolución de la web que afirma devolver el
+    poder de las plataformas a las manos de la gente. ¿Pero realmente está
+    cumpliendo su promesa?
+  </p>
+  <button
+    class="bg-Soft-red uppercase px-8 py-3 font-bold cursor-pointer hover:bg-Soft-red/90"
+    >Leer mas
+  </button>
 </header>
