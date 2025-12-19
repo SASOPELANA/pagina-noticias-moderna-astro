@@ -27,8 +27,8 @@ const { title, description, icons } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title || "Pagina de Noticias Moderna."}</title>
   </head>
-  <body class="flex flex-col items-center font-Inter mx-auto">
-    <main class="w-full max-w-[375px] px-4 my-8 mx-auto">
+  <body class="flex flex-col items-center font-Inter">
+    <main class="w-full max-w-[375px] px-2 my-8">
       <Navbar />
       <slot />
       <Footer />
