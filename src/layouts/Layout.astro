@@ -4,6 +4,9 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import favicom from "../assets/icons/news-updates-icon.png";
 
+// efecto de transicion de paginas --> efecto suave
+import { ClientRouter } from "astro:transitions";
+
 // Interface Astro
 interface Props {
   title: string;
@@ -25,6 +28,7 @@ const { title, description } = Astro.props;
     />
     <link rel="icon" type="image/svg+xml" href={favicom.src} />
     <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
     <title>{title || "Pagina de Noticias Moderna."}</title>
   </head>
   <body class="flex flex-col items-center font-Inter">

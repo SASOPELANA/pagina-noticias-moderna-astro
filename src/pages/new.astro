@@ -1,9 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { articles } from "../data/articles.data";
+import NewArticle from "../components/NewArticle.astro";
 ---
 
 <Layout title="Nuevas Noticias" description="Nuevas Noticias - Modernas">
   <section>
-    <h2 class="text-3xl">Nuevas Noticias</h2>
+    <h1 class="text-Soft-orange font-bold text-[2rem]">Nuevas Noticias</h1>
+    <div class="xl:grid xl:grid-cols-2 xl:gap-6">
+      {
+        articles.map((article) => (
+          <NewArticle article={article} showImage={true} />
+        ))
+      }
+    </div>
   </section>
 </Layout>

@@ -1,26 +1,7 @@
 ---
-interface New {
-  title: string;
-  description: string;
-}
-
-const articles: New[] = [
-  {
-    title: "Hidrógeno VS Coches Eléctricos",
-    description:
-      "¿Los coches de hidrógeno alguna vez alcanzarán a los vehículos eléctricos?",
-  },
-  {
-    title: "Inconvenientes del Arte con IA",
-    description:
-      "¿Cuáles son los posibles efectos adversos de la generación de imágenes con IA bajo demanda?",
-  },
-  {
-    title: "¿Se está agotando la financiación de capital de riesgo?",
-    description:
-      "La financiación privada por parte de firmas de capital de riesgo ha bajado un 50% interanual. Analizamos qué significa esto.",
-  },
-];
+import { articles } from "../data/articles.data";
+import type { Article } from "../types/article";
+import NewArticle from "./NewArticle.astro";
 
 interface Props {
   styles?: string;
@@ -32,19 +13,10 @@ const { styles } = Astro.props;
 <section class={`bg-Very-dark-blue text-Off-white py-4 px-6 mb-16 ${styles}`}>
   <h1 class="text-Soft-orange font-bold text-[2rem]">Nuevo</h1>
   {
-    articles.map((article) => (
-      <article class="border-b border-Grayish-blue py-8 xl:py-2.5 last:border-none">
-        <a
-          href="#"
-          class="font-extrabold text-xl inline-block mb-4 cursor-pointer hover:text-Soft-orange"
-        >
-          {article.title}{" "}
-        </a>
-        <p class="text-Grayish-blue text-[0.9375rem]">
-          {" "}
-          {article.description}{" "}
-        </p>
-      </article>
-    ))
+    articles
+      .slice(0, 3)
+      .map((article: Article) => (
+        <NewArticle article={article} showImage={false} />
+      ))
   }
 </section>

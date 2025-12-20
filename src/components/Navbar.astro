@@ -28,24 +28,26 @@ import NavbarItems from "../components/NavbarItems.astro";
 </nav>
 
 <script>
-  const closeBtm = document.getElementById("close-btn");
-  const openBtm = document.getElementById("open-btn");
-  const modal = document.getElementById("menu-modal");
+  document.addEventListener("astro:page-load", () => {
+    const closeBtm = document.getElementById("close-btn");
+    const openBtm = document.getElementById("open-btn");
+    const modal = document.getElementById("menu-modal");
 
-  const menuModal = document.querySelector("#menu-modal");
-  const menuItems = menuModal?.querySelectorAll("a");
+    const menuModal = document.querySelector("#menu-modal");
+    const menuItems = menuModal?.querySelectorAll("a");
 
-  closeBtm?.addEventListener("click", () => {
-    modal?.classList.add("hidden");
-  });
-
-  openBtm?.addEventListener("click", () => {
-    modal?.classList.remove("hidden");
-  });
-
-  menuItems?.forEach((item) => {
-    item.addEventListener("click", () => {
+    closeBtm?.addEventListener("click", () => {
       modal?.classList.add("hidden");
+    });
+
+    openBtm?.addEventListener("click", () => {
+      modal?.classList.remove("hidden");
+    });
+
+    menuItems?.forEach((item) => {
+      item.addEventListener("click", () => {
+        modal?.classList.add("hidden");
+      });
     });
   });
 </script>
