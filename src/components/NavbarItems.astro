@@ -17,6 +17,7 @@ interface Props {
 }
 
 const { isHorizontal = false } = Astro.props;
+const currenPathName = Astro.url.pathname;
 ---
 
 <ul
@@ -26,7 +27,7 @@ const { isHorizontal = false } = Astro.props;
     navItems.map((item: NavItem) => (
       <li>
         <a
-          class="text-lg cursor-pointer hover:text-Soft-orange"
+          class={`text-lg cursor-pointer hover:text-Soft-orange ${currenPathName === item.href ? "text-Soft-orange" : ""} `}
           href={item.href}
         >
           {item.name}{" "}
