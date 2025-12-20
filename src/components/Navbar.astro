@@ -32,7 +32,8 @@ import NavbarItems from "../components/NavbarItems.astro";
   const openBtm = document.getElementById("open-btn");
   const modal = document.getElementById("menu-modal");
 
-  const menuItems = document.querySelectorAll("a");
+  const menuModal = document.querySelector("#menu-modal");
+  const menuItems = menuModal?.querySelectorAll("a");
 
   closeBtm?.addEventListener("click", () => {
     modal?.classList.add("hidden");
@@ -42,9 +43,9 @@ import NavbarItems from "../components/NavbarItems.astro";
     modal?.classList.remove("hidden");
   });
 
-  menuItems.forEach((item) => {
+  menuItems?.forEach((item) => {
     item.addEventListener("click", () => {
-      modal?.classList.remove("hidden");
+      modal?.classList.add("hidden");
     });
   });
 </script>
