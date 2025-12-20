@@ -11,15 +11,15 @@ const logos = [
 ];
 
 const links = [
-  { name: "Nosotros", href: "#about" },
-  { name: "Servicios", href: "#services" },
-  { name: "Casos", href: "#cases" },
-  { name: "Testimonios", href: "#Testimonials" },
-  { name: "Blog", href: "#blog" },
+  { name: "Nosotros", href: "/about" },
+  { name: "Servicios", href: "/services" },
+  { name: "Popular", href: "/popular" },
+  { name: "Tendencias", href: "/trending" },
+  { name: "Nuevo", href: "/new" },
 ];
 ---
 
-<section class="sm:px-5 mb-2">
+<section class="sm:px-0 mb-2">
   <div class="w-full max-w-[1240px] mx-auto">
     <div class="px-[15px] bg-dark text-gray py-[55px] lg:px-[60px] rounded-lg">
       <div>
@@ -28,7 +28,7 @@ const links = [
         >
           <div>
             <a
-              class="text-3xl font-bold cursor-pointer hover:text-Soft-orange/30"
+              class="text-3xl font-bold cursor-pointer hover:text-Soft-orange/80"
               href="/"
             >
               <h2>Noticias</h2>
@@ -39,7 +39,10 @@ const links = [
               links.map((link) => {
                 return (
                   <li class="text-center">
-                    <a class="underline" href={link.href}>
+                    <a
+                      class="underline hover:text-Soft-orange/80"
+                      href={link.href}
+                    >
                       {link.name}
                     </a>
                   </li>
@@ -54,7 +57,11 @@ const links = [
                   <li>
                     <a href={logo.link} target="_blank">
                       <picture>
-                        <Image src={logo.src} alt={logo.name} />
+                        <Image
+                          src={logo.src}
+                          alt={logo.name}
+                          class="hover:scale-110"
+                        />
                       </picture>
                     </a>
                   </li>
@@ -68,11 +75,13 @@ const links = [
           <div
             class="flex text-center lg:text-start flex-col w-full lg:w-[30%]"
           >
-            <h3 class="mb-5 text-center md:text-left text-2xl text-Soft-orange">
+            <h3
+              class="mb-5 text-center sm:text-center lg:text-left text-2xl text-Soft-orange"
+            >
               Contactanos
             </h3>
             <div class="flex flex-col justify-between gap-4">
-              <span> Correo: examplemail.com </span>
+              <span> Correo: example@email.com </span>
               <span> Celular: +123 456 789 </span>
               <span class="lg:w-3/4">
                 Dirección: 1234 Calle Nombre, Ciudad Nombre, Barrio Nombre
@@ -112,16 +121,20 @@ const links = [
           >2025 Noticias Moderna - Landing Pages <a
             class="underline"
             target="_blank"
-            href="#">Noticias</a
+            href="/">Noticias</a
           > por
           <a class="underline" target="_blank" href="#">Manual</a></span
         >
         <span>
           Credito
-          <a href="#" target="_blank" class="underline">Sergio</a>
+          <a
+            href="https://portafolio-web-tl1w.vercel.app/"
+            target="_blank"
+            class="underline">Sergio</a
+          >
 
           <span> &</span>
-          <a class="underline" href="#" target="_blank">Licence</a>
+          <a class="underline" href="/license" target="_blank">Licence</a>
         </span>
       </div>
     </div>

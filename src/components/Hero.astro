@@ -1,20 +1,37 @@
 ---
 import { Image } from "astro:assets";
 import mobileImg from "../assets/images/image-web-3-mobile.jpg";
+import desktopImg from "../assets/images/image-web-3-desktop.jpg";
+import Alert from "./Alert.astro";
+
+interface Props {
+  styles?: string;
+}
+
+const { styles } = Astro.props;
 ---
 
-<header class="mb-16">
-  <Image class="mb-6" src={mobileImg} alt="image-web-3-mobile" />
-  <h1 class="text-[2.5rem]/10 font-extrabold mb-6">
-    El futuro brillante de la web 3.0?
-  </h1>
-  <p class="text-Dark-grayish-blue text-[0.9375rem] mb-6">
-    Nos sumergimos en la próxima evolución de la web que afirma devolver el
-    poder de las plataformas a las manos de la gente. ¿Pero realmente está
-    cumpliendo su promesa?
-  </p>
-  <button
-    class="bg-Soft-red uppercase px-8 py-3 font-bold cursor-pointer hover:bg-Soft-red/90"
-    >Leer mas
-  </button>
+<header class={`mb-16 ${styles}`}>
+  <div class="mb-6 xl:mb-10">
+    <Image class="sm:hidden" src={mobileImg} alt="image-web-3-mobile" />
+    <Image class="hidden sm:block" src={desktopImg} alt="image-web-3-desktop" />
+  </div>
+
+  <div class="flex flex-col items-start xl:flex-row">
+    <h1
+      class="text-[2.5rem]/10 font-extrabold mb-6 xl:text-[3.5rem]/14 xl:flex-1 xl:mb-0"
+    >
+      El futuro brillante de la web 3.0?
+    </h1>
+
+    <div class="xl:flex-1">
+      <p class="text-Dark-grayish-blue text-[0.9375rem] mb-6">
+        Nos sumergimos en la próxima evolución de la web que afirma devolver el
+        poder de las plataformas a las manos de la gente. ¿Pero realmente está
+        cumpliendo su promesa?
+      </p>
+
+      <Alert triggerText="Leer mas" />
+    </div>
+  </div>
 </header>

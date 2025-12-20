@@ -1,0 +1,68 @@
+---
+import AlertaMDX from "../content/alert.mdx";
+
+interface Props {
+  triggerText?: string;
+}
+
+const { triggerText = "Leer más" } = Astro.props;
+---
+
+<button
+  id="open-alert-btn"
+  class="bg-Soft-red uppercase px-8 py-3 font-bold cursor-pointer hover:bg-Soft-red/90 text-Off-white tracking-widest text-sm transition-colors duration-300"
+>
+  {triggerText}
+</button>
+
+<div
+  id="alert-modal"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4 transition-opacity duration-300"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    class="bg-Off-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl shadow-2xl relative flex flex-col md:p-8 p-6"
+  >
+    <article
+      class="prose prose-slate max-w-none prose-p:text-Dark-grayish-blue prose-headings:text-Very-dark-blue lg:prose-lg"
+    >
+      <AlertaMDX />
+    </article>
+
+    <div
+      class="mt-8 flex justify-end sticky bottom-0 bg-transparent pt-4 border-t border-transparent"
+    >
+      <button
+        id="close-alert-btn"
+        class="bg-Very-dark-blue text-Off-white px-6 py-2 uppercase tracking-widest hover:bg-Soft-red transition-colors duration-300 font-bold text-sm cursor-pointer"
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("alert-modal");
+  const openBtn = document.getElementById("open-alert-btn");
+  const closeBtn = document.getElementById("close-alert-btn");
+
+  openBtn?.addEventListener("click", () => {
+    modal?.classList.remove("hidden");
+    modal?.classList.add("flex");
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    modal?.classList.add("hidden");
+    modal?.classList.remove("flex");
+  });
+
+  // Close when clicking outside
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+  });
+</script>

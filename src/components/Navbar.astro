@@ -2,24 +2,15 @@
 import Logo from "../assets/images/logo.svg";
 import iconClose from "../assets/images/icon-menu-close.svg";
 import IconOpen from "../assets/images/icon-menu.svg";
-
-interface NavItem {
-  name: string;
-  href: string;
-}
-
-const navItems: NavItem[] = [
-  { name: "Inicio", href: "/" },
-  { name: "Nuevo", href: "/new" },
-  { name: "Popular", href: "/popular" },
-  { name: "Tendencias", href: "/trending" },
-  { name: "Categorías", href: "/categories" },
-];
+import NavbarItems from "../components/NavbarItems.astro";
 ---
 
 <nav class="flex justify-between items-center mb-6">
-  <Logo />
-  <IconOpen id="open-btn" class="cursor-pointer" />
+  <a href="/">
+    <Logo />
+  </a>
+  <NavbarItems isHorizontal={true} />
+  <IconOpen id="open-btn" class="cursor-pointer lg:hidden" />
   <div id="menu-modal" class="bg-black/50 fixed inset-0 hidden">
     <div
       class="bg-Off-white absolute right-0 h-screen flex flex-col items-end px-5.25 py-6.75"
@@ -31,20 +22,7 @@ const navItems: NavItem[] = [
         class="cursor-pointer"
       />
 
-      <ul class="flex flex-col w-64 gap-6 mt-22">
-        {
-          navItems.map((item: NavItem) => (
-            <li>
-              <a
-                class="text-lg cursor-pointer hover:text-Soft-orange"
-                href={item.href}
-              >
-                {item.name}{" "}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <NavbarItems />
     </div>
   </div>
 </nav>

@@ -11,7 +11,7 @@ const articles: New[] = [
       "¿Los coches de hidrógeno alguna vez alcanzarán a los vehículos eléctricos?",
   },
   {
-    title: "Los Inconvenientes del Arte con IA",
+    title: "Inconvenientes del Arte con IA",
     description:
       "¿Cuáles son los posibles efectos adversos de la generación de imágenes con IA bajo demanda?",
   },
@@ -21,13 +21,19 @@ const articles: New[] = [
       "La financiación privada por parte de firmas de capital de riesgo ha bajado un 50% interanual. Analizamos qué significa esto.",
   },
 ];
+
+interface Props {
+  styles?: string;
+}
+
+const { styles } = Astro.props;
 ---
 
-<section class="bg-Very-dark-blue text-Off-white py-4 px-6 mb-16">
+<section class={`bg-Very-dark-blue text-Off-white py-4 px-6 mb-16 ${styles}`}>
   <h1 class="text-Soft-orange font-bold text-[2rem]">Nuevo</h1>
   {
     articles.map((article) => (
-      <article class="border-b border-Grayish-blue py-8 last:border-none">
+      <article class="border-b border-Grayish-blue py-8 xl:py-2.5 last:border-none">
         <a
           href="#"
           class="font-extrabold text-xl inline-block mb-4 cursor-pointer hover:text-Soft-orange"
