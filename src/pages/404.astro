@@ -1,42 +1,11 @@
 ---
-import { Image } from "astro:assets";
-import IconConstruccion from "../assets/icons/en-construccion.png";
 import Layout from "../layouts/Layout.astro";
+import Error404Pages from "../components/pages/404.pages.astro";
 ---
 
 <Layout
   title="Error 404 - Pagina no encontrada"
   description="Página en construcción"
 >
-  <div
-    class="h-screen grid place-items-center text-center px-8 bg-gray-200 mb-10"
-  >
-    <div>
-      <Image
-        src={IconConstruccion}
-        alt="Página en construcción"
-        class="w-20 h-20 mx-auto"
-      />
-
-      <strong
-        class="mt-10 block text-3xl md:text-4xl font-bold text-black/300 leading-snug"
-      >
-        Error 404 <br /> Parece que algo salió mal.
-      </strong>
-
-      <p
-        class="mt-8 mb-14 text-[1rem] font-normal text-Dark-grayish-blue mx-auto md:max-w-sm"
-      >
-        No te preocupes, nuestro equipo ya está trabajando en ello. Por favor,
-        intenta actualizar la página o vuelve más tarde.
-      </p>
-
-      <a
-        href="/"
-        class="inline-block w-full md:w-32 px-4 py-2 bg-Dark-grayish-blue text-Off-white font-semibold rounded hover:bg-Dark-grayish-blue/80 transition-colors cursor-pointer"
-      >
-        Volver al inicio
-      </a>
-    </div>
-  </div>
+  <Error404Pages />
 </Layout>
