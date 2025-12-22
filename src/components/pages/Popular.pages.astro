@@ -1,0 +1,54 @@
+---
+// 1. Cambiamos getEntry por getCollection
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+// 2. Traemos todos los archivos de la carpeta 'popular'
+const popularNews = await getCollection("popular");
+---
+
+<div>
+  <div class="max-w-screen-xl mx-auto my-14">
+    <div class="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-5">
+      {
+        /* 3. Usamos .map() para que Astro dibuje cada noticia automáticamente */
+      }
+      {
+        popularNews.map((news) => (
+          <div class="relative w-full flex items-end justify-start text-left h-[450px] overflow-hidden">
+            <Image
+              src={news.data.image}
+              alt={news.data.title}
+              class="absolute inset-0 w-full h-full object-cover -z-10 rounded-xl"
+            />
+            <div class="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900" />
+
+            <div class="absolute top-0 right-0 left-0 mx-5 mt-2 flex justify-between items-center">
+              <a
+                href="#"
+                class="text-xs bg-indigo-600 text-white px-5 py-2 uppercase hover:bg-white hover:text-indigo-600 transition ease-in-out duration-500"
+              >
+                {news.data.subTitle}
+              </a>
+              <div class="text-white font-regular flex flex-col justify-start items-center">
+                <span class="text-3xl leading-none font-semibold">
+                  {news.data.dia}
+                </span>
+                <span class="text-xs uppercase">{news.data.mes}</span>
+              </div>
+            </div>
+
+            <main class="p-5 z-10">
+              <a
+                href="#"
+                class="text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline"
+              >
+                {news.data.title}
+              </a>
+            </main>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

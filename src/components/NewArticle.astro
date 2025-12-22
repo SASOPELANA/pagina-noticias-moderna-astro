@@ -26,7 +26,7 @@ const { article, showImage = true } = Astro.props;
   </p>
   {
     showImage && (
-      <a href={`/new/${article.slug}`} transition:name={article.title}>
+      <a href={`/new/${article.slug}`}>
         <Image
           class="mt-6 rounded-lg w-full h-96 object-cover xl:w-full xl:h-56"
           src={article.image}
