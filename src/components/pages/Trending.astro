@@ -1,13 +1,25 @@
-<div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16 relative">
-  <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
+---
+import { Image } from "astro:assets";
+import { trending } from "../../data/trending.data";
+---
+
+<div class="max-w-screen-xl mx-auto my-10 relative">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-12 gap-5"
+    transition:name={trending[0].title}
+  >
     <!-- Noticia principal -->
     <div class="sm:col-span-5">
-      <a href="#">
+      <a href={`/trending/${trending[0].slug}`}>
         <div
           class="bg-cover text-center overflow-hidden"
-          style="min-height: 300px; background-image: url('https://api.time.com/wp-content/uploads/2020/07/never-trumpers-2020-election-01.jpg?quality=85&w=1201&h=676&crop=1')"
           title="Elecciones en Estados Unidos"
         >
+          <Image
+            src={trending[0].image}
+            alt={trending[0].title}
+            class="min-h-[300px] rounded-md"
+          />
         </div>
       </a>
       <div
@@ -15,128 +27,46 @@
       >
         <div>
           <a
-            href="#"
-            class="text-xs text-indigo-600 uppercase font-medium hover:text-gray-900 transition duration-500 ease-in-out"
+            href={`/trending/${trending[0].slug}`}
+            class="text-xs text-Soft-red uppercase font-medium hover:text-gray-900 transition duration-500 ease-in-out"
           >
-            Elecciones
+            {trending[0].subTitle}
           </a>
           <a
-            href="#"
-            class="block text-gray-900 font-bold text-2xl mb-2 hover:text-indigo-600 transition duration-500 ease-in-out"
+            href={`/trending/${trending[0].slug}`}
+            class="block text-gray-900 font-bold text-2xl mb-2 hover:text-Soft-orange transition duration-500 ease-in-out"
           >
-            La revancha de los republicanos anti-Trump
+            {trending[0].title}
           </a>
           <p class="text-gray-700 text-base mt-2">
-            Conocé a los disidentes republicanos que buscan sacar a Donald Trump
-            del poder y recuperar su partido.
+            {trending[0].description}
           </p>
         </div>
       </div>
     </div>
 
     <!-- Noticias secundarias -->
+
     <div class="sm:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5">
-      <div>
-        <a href="#">
-          <div
-            class="h-40 bg-cover text-center overflow-hidden"
-            style="background-image: url('https://api.time.com/wp-content/uploads/2020/07/president-trump-coronavirus-election.jpg?quality=85&w=364&h=204&crop=1')"
-            title="Trump y el coronavirus"
-          >
+      {
+        trending.slice(1, 7).map((trending) => (
+          <div transition:name={trending.title}>
+            <a href={`/trending/${trending.slug}`}>
+              <Image
+                src={trending.image}
+                alt={trending.title}
+                class="h-40 bg-cover text-center overflow-hidden rounded-md"
+              />
+            </a>
+            <a
+              href={`/trending/${trending.slug}`}
+              class="text-gray-900 inline-block font-semibold text-md my-2 hover:text-Soft-orange transition duration-500 ease-in-out"
+            >
+              {trending.title}
+            </a>
           </div>
-        </a>
-        <a
-          href="#"
-          class="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out"
-        >
-          Trump vuelve al centro de la escena por el coronavirus
-        </a>
-      </div>
-
-      <div>
-        <a href="#">
-          <div
-            class="h-40 bg-cover text-center overflow-hidden"
-            style="background-image: url('https://api.time.com/wp-content/uploads/2020/06/GettyImages-1222922545.jpg?quality=85&w=364&h=204&crop=1')"
-            title="Elecciones Biden Trump"
-          >
-          </div>
-        </a>
-        <a
-          href="#"
-          class="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out"
-        >
-          Cómo los errores de Trump impulsaron la campaña de Biden
-        </a>
-      </div>
-
-      <div>
-        <a href="#">
-          <div
-            class="h-40 bg-cover text-center overflow-hidden"
-            style="background-image: url('https://api.time.com/wp-content/uploads/2020/07/American-Flag.jpg?quality=85&w=364&h=204&crop=1')"
-            title="Opinión pública en EE.UU."
-          >
-          </div>
-        </a>
-        <a
-          href="#"
-          class="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out"
-        >
-          Encuesta: muchos estadounidenses están insatisfechos con el país
-        </a>
-      </div>
-
-      <div>
-        <a href="#">
-          <div
-            class="h-40 bg-cover text-center overflow-hidden"
-            style="background-image: url('https://api.time.com/wp-content/uploads/2020/06/GettyImages-1222922545.jpg?quality=85&w=364&h=204&crop=1')"
-            title="Campaña electoral"
-          >
-          </div>
-        </a>
-        <a
-          href="#"
-          class="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out"
-        >
-          Los tropiezos de Trump que fortalecieron a sus rivales
-        </a>
-      </div>
-
-      <div>
-        <a href="#">
-          <div
-            class="h-40 bg-cover text-center overflow-hidden"
-            style="background-image: url('https://api.time.com/wp-content/uploads/2020/07/American-Flag.jpg?quality=85&w=364&h=204&crop=1')"
-            title="Crisis social en EE.UU."
-          >
-          </div>
-        </a>
-        <a
-          href="#"
-          class="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out"
-        >
-          Crece el descontento social en Estados Unidos, según encuestas
-        </a>
-      </div>
-
-      <div>
-        <a href="#">
-          <div
-            class="h-40 bg-cover text-center overflow-hidden"
-            style="background-image: url('https://api.time.com/wp-content/uploads/2020/07/president-trump-coronavirus-election.jpg?quality=85&w=364&h=204&crop=1')"
-            title="Trump y la pandemia"
-          >
-          </div>
-        </a>
-        <a
-          href="#"
-          class="text-gray-900 inline-block font-semibold text-md my-2 hover:text-indigo-600 transition duration-500 ease-in-out"
-        >
-          El impacto del coronavirus vuelve a golpear a la Casa Blanca
-        </a>
-      </div>
+        ))
+      }
     </div>
   </div>
 </div>
