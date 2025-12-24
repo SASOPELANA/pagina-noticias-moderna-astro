@@ -5,7 +5,7 @@ interface Props {
   triggerText?: string;
 }
 
-const { triggerText = "Leer más" } = Astro.props;
+const { triggerText = "Leer más" } = Astro.props as Props;
 ---
 
 <button

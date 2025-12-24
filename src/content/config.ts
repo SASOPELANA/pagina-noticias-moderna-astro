@@ -13,6 +13,21 @@ const popularCollection = defineCollection({
     }),
 });
 
+const categoriesCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      categoriesImg: image(),
+      cards: z.array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+        }),
+      ),
+    }),
+});
+
 export const collections = {
   popular: popularCollection,
+  categories: categoriesCollection,
 };
