@@ -1,9 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import CategoriesPages from "../components/pages/Categories.pages.astro";
 ---
 
-<Layout title="Categorías" description="Categorías de noticias">
+<Layout title="Categorías de noticias" description="Categorías de noticias">
   <section>
-    <h2 class="text-3xl">Categorías</h2>
+    <h2
+      class="text-[1.5rem] sm:text-[2rem] font-bold text-Soft-orange max-sm:flex max-sm:justify-center"
+    >
+      Categorías - Noticias
+    </h2>
+    <CategoriesPages />
   </section>
 </Layout>
