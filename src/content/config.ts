@@ -13,7 +13,7 @@ const popularCollection = defineCollection({
     }),
 });
 
-const categoriesCollection = defineCollection({
+const categoryIndexCollection = defineCollection({
   type: "content",
   schema: ({ image }) =>
     z.object({
@@ -27,7 +27,21 @@ const categoriesCollection = defineCollection({
     }),
 });
 
+const categoriesCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      subTitle: z.string(),
+      description: z.string(),
+      image: image(),
+      dia: z.string(),
+      mes: z.string(),
+    }),
+});
+
 export const collections = {
   popular: popularCollection,
+  "category-index": categoryIndexCollection,
   categories: categoriesCollection,
 };

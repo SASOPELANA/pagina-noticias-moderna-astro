@@ -2,9 +2,10 @@
 import { getEntry, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 
-const indexCategories: CollectionEntry<"categories"> | undefined = await getEntry("categories", "categoria-index");
+const indexCategories: CollectionEntry<"category-index"> | undefined =
+  await getEntry("category-index", "index");
 
-const data = indexCategories?.data; 
+const data = indexCategories?.data;
 ---
 
 {
@@ -12,7 +13,6 @@ const data = indexCategories?.data;
     <section>
       <div class="max-w-screen-xl mx-auto py-8 mb-4 lg:mb-8">
         <div class="flex flex-col md:flex-row">
-          <!-- can help image -->
           <div class="mr-0 md:mr-8 mb-6 md:mb-0">
             <Image
               src={data.categoriesImg}
@@ -28,12 +28,15 @@ const data = indexCategories?.data;
               <div class="w-full sm:w-1/2 mb-4 px-2">
                 <div class="h-full py-4 px-6 border border-Dark-grayish-blue border-t-0 border-l-0 rounded-br-xl">
                   <a href="" class="cursor-pointer hover:text-Soft-orange">
-                    <h3 class="text-2xl font-bold mb-2 truncate">{card.title}</h3>
+                    <h3 class="text-2xl font-bold mb-2 truncate">
+                      {card.title}
+                    </h3>
                   </a>
                   <a href="" class="cursor-pointer">
-                    <p class="text-sm text-shadow-Dark-grayish-blue line-clamp-3 hover:underline">{card.description}</p>
+                    <p class="text-sm text-shadow-Dark-grayish-blue line-clamp-3 hover:underline">
+                      {card.description}
+                    </p>
                   </a>
-                 
                 </div>
               </div>
             ))}
