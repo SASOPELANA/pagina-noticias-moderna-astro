@@ -1,23 +1,25 @@
 ---
 import { Image } from "astro:assets";
-import { trending } from "../../data/trending.data";
+import { getCollection } from "astro:content";
+
+const trending = await getCollection("trending");
 ---
 
 <div class="max-w-screen-xl mx-auto my-10 relative">
   <div
     class="grid grid-cols-1 sm:grid-cols-12 gap-5"
-    transition:name={trending[0].title}
+    transition:name={trending[0].data.title}
   >
     <!-- Noticia principal -->
     <div class="sm:col-span-5">
       <a href={`/trending/${trending[0].slug}`}>
         <div
           class="bg-cover text-center overflow-hidden"
-          title="Elecciones en Estados Unidos"
+          title={trending[0].data.title}
         >
           <Image
-            src={trending[0].image}
-            alt={trending[0].title}
+            src={trending[0].data.image}
+            alt={trending[0].data.title}
             class="min-h-[300px] rounded-md"
           />
         </div>
@@ -30,16 +32,16 @@ import { trending } from "../../data/trending.data";
             href={`/trending/${trending[0].slug}`}
             class="text-xs text-Soft-red uppercase font-medium hover:text-gray-900 transition duration-500 ease-in-out"
           >
-            {trending[0].subTitle}
+            {trending[0].data.subTitle}
           </a>
           <a
             href={`/trending/${trending[0].slug}`}
             class="block text-gray-900 font-bold text-2xl mb-2 hover:text-Soft-orange transition duration-500 ease-in-out"
           >
-            {trending[0].title}
+            {trending[0].data.title}
           </a>
           <p class="text-gray-700 text-base mt-2">
-            {trending[0].description}
+            {trending[0].data.description}
           </p>
         </div>
       </div>
@@ -49,20 +51,20 @@ import { trending } from "../../data/trending.data";
 
     <div class="sm:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-5">
       {
-        trending.slice(1, 7).map((trending) => (
-          <div transition:name={trending.title}>
-            <a href={`/trending/${trending.slug}`}>
+        trending.slice(1, 7).map((item) => (
+          <div transition:name={item.data.title}>
+            <a href={`/trending/${item.slug}`}>
               <Image
-                src={trending.image}
-                alt={trending.title}
+                src={item.data.image}
+                alt={item.data.title}
                 class="h-40 bg-cover text-center overflow-hidden rounded-md"
               />
             </a>
             <a
-              href={`/trending/${trending.slug}`}
+              href={`/trending/${item.slug}`}
               class="text-gray-900 inline-block font-semibold text-md my-2 hover:text-Soft-orange transition duration-500 ease-in-out"
             >
-              {trending.title}
+              {item.data.title}
             </a>
           </div>
         ))

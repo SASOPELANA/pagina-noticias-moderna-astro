@@ -1,21 +1,24 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
-import { articles } from "../../data/articles.data";
-import type { Article } from "../../types/article";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 
-export const getStaticPaths = (() => {
-  return articles.map((article: Article) => ({
+export const getStaticPaths = (async () => {
+  const articles = await getCollection("new");
+  return articles.map((article) => ({
     params: {
       slug: article.slug,
     },
+    props: { article },
   }));
 }) satisfies GetStaticPaths;
 
-const { slug } = Astro.params;
+interface Props {
+  article: CollectionEntry<"new">;
+}
 
-const currentArticle = articles.filter((article) => article.slug === slug)[0];
+const { article } = Astro.props;
 ---
 
 <Layout title="Nuevo Artículo" description="Página">
@@ -23,16 +26,16 @@ const currentArticle = articles.filter((article) => article.slug === slug)[0];
     <!-- Título del artículo -->
     <h1
       class="font-bold text-3xl sm:text-4xl lg:text-5xl mb-4 sm:mb-6 leading-tight text-gray-900"
-      transition:name={currentArticle.title}
+      transition:name={article.data.title}
     >
-      {currentArticle.title}
+      {article.data.title}
     </h1>
 
     <!-- Descripción/Subtítulo -->
     <p
       class="text-base sm:text-lg lg:text-xl mb-8 sm:mb-10 text-gray-600 italic font-light border-l-4 border-Soft-orange pl-4 sm:pl-6"
     >
-      {currentArticle.description}
+      {article.data.description}
     </p>
 
     <!-- Imagen destacada -->
@@ -40,8 +43,8 @@ const currentArticle = articles.filter((article) => article.slug === slug)[0];
       class="mb-8 sm:mb-12 overflow-hidden rounded-xl shadow-2xl hover:shadow-3xl transition-shadow duration-300"
     >
       <Image
-        src={currentArticle.image}
-        alt={currentArticle.title}
+        src={article.data.image}
+        alt={article.data.title}
         width={800}
         height={600}
         class="w-full h-auto object-cover"
@@ -50,11 +53,9 @@ const currentArticle = articles.filter((article) => article.slug === slug)[0];
 
     <!-- Contenido del artículo -->
     <div class="prose prose-lg sm:prose-xl max-w-none mb-10 sm:mb-14">
-      <p
-        class="text-base sm:text-lg leading-relaxed text-gray-700 whitespace-pre-line"
-      >
-        {currentArticle.content}
-      </p>
+      <div class="text-base sm:text-lg leading-relaxed text-gray-700">
+        {article.body}
+      </div>
     </div>
 
     <!-- Botón de retorno -->

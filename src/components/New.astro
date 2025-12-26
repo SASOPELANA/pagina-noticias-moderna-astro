@@ -1,6 +1,5 @@
 ---
-import { articles } from "../data/articles.data";
-import type { Article } from "../types/article";
+import { getCollection } from "astro:content";
 import NewArticle from "./NewArticle.astro";
 
 interface Props {
@@ -8,6 +7,7 @@ interface Props {
 }
 
 const { styles } = Astro.props;
+const articles = await getCollection("new");
 ---
 
 <section class={`bg-Very-dark-blue text-Off-white py-4 px-6 mb-16 ${styles}`}>
@@ -16,7 +16,7 @@ const { styles } = Astro.props;
   {
     articles
       .slice(0, 3)
-      .map((article: Article) => (
+      .map((article) => (
         <NewArticle article={article} showImage={false} />
       ))
   }

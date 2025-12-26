@@ -1,70 +1,62 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
-export const getStaticPaths = (async () => {
-  const trending = await getCollection("trending");
-  return trending.map((item) => ({
-    params: {
-      slug: item.slug,
-    },
-    props: { article: item },
-  }));
-}) satisfies GetStaticPaths;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const items = await getCollection("categories");
+  return items.map((item) => ({ params: { slug: item.slug } }));
+};
 
-interface Props {
-  article: CollectionEntry<"trending">;
+const { slug } = Astro.params;
+const items = await getCollection("categories");
+const current = items.find((item) => item.slug === slug);
+
+if (!current) {
+  throw new Error(`Artículo por categoría no encontrado: ${slug}`);
 }
 
-const { article: currentArticle } = Astro.props;
+const { Content } = await current.render();
 ---
 
-<Layout title="Nuevo Artículo" description="Página">
+<Layout title={current.data.title} description={current.data.description}>
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-    <!-- Título del artículo -->
     <h1
       class="font-bold text-3xl sm:text-4xl lg:text-5xl mb-4 sm:mb-6 leading-tight text-gray-900"
-      transition:name={currentArticle.data.title}
+      transition:name={current.data.title}
     >
-      {currentArticle.data.title}
+      {current.data.title}
     </h1>
 
-    <!-- Descripción/Subtítulo -->
     <p
       class="text-base sm:text-lg lg:text-xl mb-8 sm:mb-10 text-gray-600 italic font-light border-l-4 border-Soft-orange pl-4 sm:pl-6"
     >
-      {currentArticle.data.description}
+      {current.data.description}
     </p>
 
-    <!-- Imagen destacada -->
     <div
       class="mb-8 sm:mb-12 overflow-hidden rounded-xl shadow-2xl hover:shadow-3xl transition-shadow duration-300"
     >
       <Image
-        src={currentArticle.data.image}
-        alt={currentArticle.data.title}
+        src={current.data.image}
+        alt={current.data.title}
         width={800}
         height={600}
         class="w-full h-auto object-cover"
       />
     </div>
 
-    <!-- Contenido del artículo -->
     <div class="prose prose-lg sm:prose-xl max-w-none mb-10 sm:mb-14">
-      <div class="text-base sm:text-lg leading-relaxed text-gray-700">
-        {currentArticle.body}
-      </div>
+      <Content />
     </div>
 
-    <!-- Botón de retorno -->
     <div
       class="flex justify-center sm:justify-end pt-8 border-t border-gray-200"
     >
       <a
-        id="go-back-trending"
-        href="/"
+        id="go-back-categories"
+        href="/categories"
         class="group inline-flex items-center gap-2 px-6 py-3 border-2 bg-Soft-orange text-white font-semibold rounded-lg shadow-lg hover:text-Soft-red hover:bg-Off-white hover:border-Soft-red"
       >
         <svg
@@ -79,7 +71,7 @@ const { article: currentArticle } = Astro.props;
             stroke-width="2"
             d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
-        Volver al atrás
+        Volver
       </a>
     </div>
   </article>
@@ -87,9 +79,9 @@ const { article: currentArticle } = Astro.props;
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const backBtn = document.querySelector("#go-back-trending");
-
-    backBtn?.addEventListener("click", () => {
+    const backBtn = document.querySelector("#go-back-categories");
+    backBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
       history.back();
     });
   });

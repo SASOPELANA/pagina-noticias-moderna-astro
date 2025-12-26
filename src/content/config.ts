@@ -21,6 +21,7 @@ const categoryIndexCollection = defineCollection({
       cards: z.array(
         z.object({
           title: z.string(),
+          slug: z.string(),
           description: z.string(),
         }),
       ),
@@ -40,8 +41,44 @@ const categoriesCollection = defineCollection({
     }),
 });
 
+const newCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      image: image(),
+    }),
+});
+
+const trendingCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      subTitle: z.string().optional(),
+      description: z.string(),
+      image: image(),
+    }),
+});
+
+const articlesCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      number: z.string(),
+      title: z.string(),
+      description: z.string(),
+      image: image(),
+      url: z.string().optional(),
+    }),
+});
+
 export const collections = {
   popular: popularCollection,
   "category-index": categoryIndexCollection,
   categories: categoriesCollection,
+  new: newCollection,
+  trending: trendingCollection,
+  articles: articlesCollection,
 };
