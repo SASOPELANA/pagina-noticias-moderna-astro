@@ -16,8 +16,6 @@ const articles = await getCollection("new");
   {
     articles
       .slice(0, 3)
-      .map((article) => (
-        <NewArticle article={article} showImage={false} />
-      ))
+      .map((article) => <NewArticle article={article} showImage={false} />)
   }
 </section>

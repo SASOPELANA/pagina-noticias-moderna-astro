@@ -46,6 +46,7 @@ const newCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      subTitle: z.string().optional(),
       description: z.string(),
       image: image(),
     }),
@@ -59,6 +60,7 @@ const trendingCollection = defineCollection({
       subTitle: z.string().optional(),
       description: z.string(),
       image: image(),
+      order: z.number().optional(),
     }),
 });
 

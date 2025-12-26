@@ -11,7 +11,11 @@ articles.sort((a, b) => a.data.number.localeCompare(b.data.number));
   {
     articles.map((article) => (
       <article class="flex mb-8 gap-8">
-        <Image class="w-[100px]" src={article.data.image} alt={article.data.title} />
+        <Image
+          class="w-[100px]"
+          src={article.data.image}
+          alt={article.data.title}
+        />
         <div>
           <p class="text-[2rem] font-bold text-Soft-orange">
             {article.data.number}{" "}

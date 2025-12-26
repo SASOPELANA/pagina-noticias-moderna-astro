@@ -9,14 +9,18 @@ export async function getStaticPaths() {
   // Actualmente los slugs son como "deportes/deporte-1" o "deportes/deporte-2" (basado en la estructura de carpetas)
   // Los ítems de la colección 'categories' tienen un 'slug' que actúa como ID.
   // Sin embargo, necesito agruparlos por categoría de nivel superior.
-  
+
   // Vamos a inspeccionar los ids de la colección para determinar la categoría.
   // Los IDs son como "deportes/deporte-1.mdx"
 
-  const categories = [...new Set(allPosts.map((post) => post.id.split("/")[0]))];
-  
+  const categories = [
+    ...new Set(allPosts.map((post) => post.id.split("/")[0])),
+  ];
+
   return categories.map((cat) => {
-    const filteredPosts = allPosts.filter((post) => post.id.startsWith(cat + "/"));
+    const filteredPosts = allPosts.filter((post) =>
+      post.id.startsWith(cat + "/"),
+    );
     return {
       params: { category: cat },
       props: { posts: filteredPosts, categoryName: cat },
@@ -35,12 +39,14 @@ import { getEntry } from "astro:content";
 const indexEntry = await getEntry("category-index", "index");
 const categoryCard = indexEntry?.data.cards.find((c) => c.slug === category);
 const title = categoryCard ? categoryCard.title : categoryName;
-
 ---
 
-<Layout title={`Noticias de ${title}`} description={`Todas las noticias de ${title}`}>
+<Layout
+  title={`Noticias de ${title}`}
+  description={`Todas las noticias de ${title}`}
+>
   <section class="py-8">
-     <h1 class="text-3xl font-bold text-center mb-8 capitalize">{title}</h1>
-     <CategoriesSubPages posts={posts} />
+    <h1 class="text-3xl font-bold text-center mb-8 capitalize">{title}</h1>
+    <CategoriesSubPages posts={posts} />
   </section>
 </Layout>

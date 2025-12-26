@@ -2,7 +2,10 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
-const trending = await getCollection("trending");
+const trendingCollection = await getCollection("trending");
+const trending = trendingCollection.sort(
+  (a, b) => (a.data.order || 99) - (b.data.order || 99),
+);
 ---
 
 <div class="max-w-screen-xl mx-auto my-10 relative">

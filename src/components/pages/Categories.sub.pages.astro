@@ -10,7 +10,7 @@ interface Props {
 const { posts } = Astro.props;
 
 // 2. Traemos todos los archivos de la carpeta 'categories' si no se pasan posts
-const categoriesSub = posts || await getCollection("categories");
+const categoriesSub = posts || (await getCollection("categories"));
 ---
 
 <div>
@@ -44,7 +44,9 @@ const categoriesSub = posts || await getCollection("categories");
                   <span class="block text-3xl font-semibold">
                     {category.data.dia}
                   </span>
-                  <span class="block text-xs uppercase">{category.data.mes}</span>
+                  <span class="block text-xs uppercase">
+                    {category.data.mes}
+                  </span>
                 </div>
               </div>
 

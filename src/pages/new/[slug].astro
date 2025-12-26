@@ -19,6 +19,7 @@ interface Props {
 }
 
 const { article } = Astro.props;
+const { Content } = await article.render();
 ---
 
 <Layout title="Nuevo Artículo" description="Página">
@@ -53,9 +54,7 @@ const { article } = Astro.props;
 
     <!-- Contenido del artículo -->
     <div class="prose prose-lg sm:prose-xl max-w-none mb-10 sm:mb-14">
-      <div class="text-base sm:text-lg leading-relaxed text-gray-700">
-        {article.body}
-      </div>
+      <Content />
     </div>
 
     <!-- Botón de retorno -->
